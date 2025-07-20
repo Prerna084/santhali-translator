@@ -1,19 +1,38 @@
 import React from "react";
 import nitLogo from "../assets/nit-logo.png";
+import { FaInstagram, FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
+   import zigzag from "../assets/zigzag.png";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#FFF6E9] border-t border-[#E2B77A] py-8 text-center mt-12">
-      <img src={nitLogo} alt="NIT Logo" className="mx-auto mb-2 h-10" />
-      <div className="font-bold text-[#341D04]">National Institute of Technology, Jamshedpur</div>
-      <div className="text-[#341D04]">Adityapur, Jamshedpur, Jharkhand 831014</div>
-      <div className="flex justify-center gap-4 mt-4 mb-2 text-2xl">
-        <span role="img" aria-label="Instagram">📷</span>
-        <span role="img" aria-label="Twitter">🐦</span>
-        <span role="img" aria-label="LinkedIn">💼</span>
-        <span role="img" aria-label="YouTube">▶️</span>
+    <footer className="w-full bg-[#FDE6B0] pt-0">
+      {/* Decorative Divider */}
+      <div className="w-full flex justify-center">
+        {/* Option 1: Simple line */}
+        {/* <div className="w-full border-t-2 border-[#E2B77A]" /> */}
+        {/* Option 2: Zigzag SVG */}
+        <img src={zigzag} alt="" className="w-full max-w-[1280px] h-[20px] object-cover" />
       </div>
-      <div className="text-[#341D04]">VISITORS<br /><span className="font-bold">668754</span></div>
+      {/* Footer Content */}
+      <div className="max-w-[1280px] mx-auto flex flex-col items-center justify-center px-4 py-[40px]">
+        <img src={nitLogo} alt="NIT Jamshedpur Logo" className="w-[60px] h-[60px] mb-4" />
+        <div className="font-extrabold text-[22px] text-[#341D04] text-center">
+          National Institute of Technology, Jamshedpur
+        </div>
+        <div className="text-[16px] text-[#341D04] text-center mb-4">
+          Adityapur, Jamshedpur, Jharkhand 831014
+        </div>
+        <div className="flex flex-row gap-6 mb-4 text-[#341D04] text-[28px]">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"><FaYoutube /></a>
+        </div>
+        <div className="flex flex-col items-center mt-2">
+          <span className="text-[#341D04] text-[16px]">VISITORS</span>
+          <span className="font-bold text-[22px] text-[#341D04]">668754</span>
+        </div>
+      </div>
     </footer>
   );
 }

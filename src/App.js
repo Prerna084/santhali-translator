@@ -4,6 +4,7 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import bgPattern from "./assets/bg-pattern.png";
 
+
 function App() {
   return (
     <div
@@ -12,6 +13,7 @@ function App() {
     >
       <Header />
       <Main />
+     
       <Footer />
     </div>
   );
