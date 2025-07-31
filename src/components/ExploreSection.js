@@ -1,39 +1,50 @@
 import React from "react";
-import communityPhoto from "../assets/community-photo.png";
-import santalAlphabet from "../assets/santal-alphabet.png";
+import communityImage from "../assets/community.png";
+import alphabetCard from "../assets/alphabet.png";
 
-export default function ExploreSection() {
+const ExploreSection = () => {
   return (
-    <section className="w-full max-w-[1280px] mx-auto mt-12 px-2 sm:px-4">
-      <h3 className="text-[44px] font-extrabold mb-[32px] text-[#341D04] leading-tight">
+    <div className="bg-[#fce6ab] px-4 py-10 md:px-12 lg:px-24">
+      <h2 className="text-2xl sm:text-3xl text-center font-bold text-gray-800 mb-10">
         Explore Santali Language & History
-      </h3>
-      <div className="flex flex-col md:flex-row gap-[40px] items-start">
-        {/* Overlapping images */}
-        <div className="relative w-[400px] h-[260px]">
+      </h2>
+
+      <div className="flex flex-col lg:flex-row items-start gap-10 relative">
+        {/* Community Image */}
+        <div className="relative w-full md:max-w-[280px] lg:w-[25%] mx-auto lg:mx-0">
           <img
-            src={communityPhoto}
-            alt="Santali Community"
-            className="rounded-[16px] w-[320px] h-[250px] object-cover block"
+            src={communityImage}
+            alt="Community"
+            className="rounded-xl w-full object-cover max-h-[160px]"
           />
+
+          {/* Alphabet Image - aligned properly */}
           <img
-            src={santalAlphabet}
-            alt="Santali Alphabet"
-            className="rounded-[16px] w-[295px] h-[166px] object-cover absolute left-[170px] bottom-[-130px] shadow-lg bg-[#FDE6B0] border-[4px] border-[#FDE6B0]"
-            style={{ zIndex: 2 }}
+            src={alphabetCard}
+            alt="Alphabet"
+            className="absolute bottom-[-100px] left-[105%] w-[260px] rounded-xl shadow-xl border border-gray-300 bg-white"
+            style={{ transform: "translateX(-50%)" }}
           />
         </div>
-        {/* Info Card */}
-        <div className="bg-[#8B4C0A] text-white rounded-[16px] shadow-lg flex-1 flex flex-col justify-center ml-0 md:ml-[40px] p-[44px] max-w-[700px]">
-          <div className="font-extrabold mb-[24px] text-[32px]">Did You know</div>
-          <p className="mb-[44px] text-[20px] leading-snug font-medium">
-            Santal is a Kherwarian Munda language spoken by the Santal people across eastern India and neighboring countries. With ~7.6 million speakers, it's the most widely spoken Munda language and officially recognized in India. It uses the Ol Chiki script, developed in 1925 by Raghunath Murmu.
+
+        {/* Did You Know Box */}
+        <div className="w-full lg:w-[60%] ml-auto bg-[#9b4d0b] text-white p-4 rounded-xl shadow-xl mt-24 lg:mt-0">
+          <h3 className="text-lg sm:text-xl font-semibold mb-4">Did You Know?</h3>
+          <p className="text-sm sm:text-base leading-relaxed mb-4">
+            Santali is a Kherwarian Munda language spoken by the Santal people across eastern India and neighboring countries. With ~7.6 million speakers, it's the most widely spoken Munda language and officially recognized in India. It uses the Ol Chiki script, developed in 1925 by Raghunath Murmu.
           </p>
-          <button className="font-bold bg-[#FFA94D] text-white rounded-[16px] text-[24px] px-[32px] py-[24px] w-[328px] shadow">
+          <a
+            href="https://en.wikipedia.org/wiki/Santali_language"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-orange-400 text-white px-4 py-2 rounded hover:bg-orange-500 transition"
+          >
             Explore More
-          </button>
+          </a>
         </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default ExploreSection;
