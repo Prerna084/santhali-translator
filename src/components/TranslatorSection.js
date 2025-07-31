@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 import woman from "../assets/woman.png";
 import SanthaliKeyboard from "./SanthaliKeyboard";
 import { motion, AnimatePresence } from "framer-motion";
-import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 
 export default function TranslatorSection() {
   const [input, setInput] = useState("");
@@ -16,39 +15,16 @@ export default function TranslatorSection() {
   const [showKeyboard, setShowKeyboard] = useState(true);
 
   const inputRef = useRef(null);
-  const containerRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!showUpdateInput) {
-        const scrollTop = window.scrollY;
-        setShowKeyboard(scrollTop < 100);
-      }
+      const scrollTop = window.scrollY;
+      setShowKeyboard(scrollTop < 100);
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [showUpdateInput]);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target) &&
-        output &&
-        !showUpdateInput
-      ) {
-        setInput("");
-        setOutput("");
-        setError("");
-        setShowUpdateInput(false);
-        setPopupMsg("");
-        setCustomTranslation("");
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [output, showUpdateInput]);
+  }, []);
 
   const handleSanthaliKeyboardInput = (char) => {
     if (isSanthaliToEnglish) {
@@ -109,7 +85,6 @@ export default function TranslatorSection() {
     setShowUpdateInput(true);
     setCustomTranslation(output);
     setPopupMsg("");
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleUpdateSubmit = async (e) => {
@@ -158,11 +133,7 @@ export default function TranslatorSection() {
       </div>
 
       {/* Input and Output */}
-      <div
-        ref={containerRef}
-        className="w-full max-w-4xl mb-6 relative flex flex-row gap-4 items-center"
-        style={{ minHeight: 180 }}
-      >
+      <div className="w-full max-w-4xl mb-6 relative flex flex-row gap-4 items-center" style={{ minHeight: 180 }}>
         <img
           src={woman}
           alt="Santhali Woman"
@@ -218,20 +189,16 @@ export default function TranslatorSection() {
         {output && !showUpdateInput && (
           <>
             <button
-              className="bg-green-600 text-white w-12 h-12 rounded-full text-2xl shadow hover:bg-green-800 transition flex items-center justify-center"
+              className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold text-lg shadow font-roboto hover:bg-green-800 transition"
               onClick={handleSubmit}
-              aria-label="Submit"
-              title="Submit"
             >
-              <AiOutlineCheck />
+              Submit
             </button>
             <button
-              className="bg-blue-600 text-white w-12 h-12 rounded-full text-2xl shadow hover:bg-blue-800 transition flex items-center justify-center"
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold text-lg shadow font-roboto hover:bg-blue-800 transition"
               onClick={handleUpdate}
-              aria-label="Update"
-              title="Suggest Update"
             >
-              <AiOutlineClose />
+              Update
             </button>
           </>
         )}
@@ -259,19 +226,18 @@ export default function TranslatorSection() {
         </div>
       )}
 
-      {/* Keyboard */}
+      {/* Keyboard with slide in/out */}
       <AnimatePresence>
-        {(isSanthaliToEnglish || (!isSanthaliToEnglish && showUpdateInput)) &&
-          (showKeyboard || showUpdateInput) && (
-            <motion.div
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 100, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <SanthaliKeyboard onInput={handleSanthaliKeyboardInput} />
-            </motion.div>
-          )}
+        {(isSanthaliToEnglish || (!isSanthaliToEnglish && showUpdateInput)) && showKeyboard && (
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <SanthaliKeyboard onInput={handleSanthaliKeyboardInput} />
+          </motion.div>
+        )}
       </AnimatePresence>
     </section>
   );
