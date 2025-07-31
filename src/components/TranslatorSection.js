@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import woman from "../assets/woman.png";
 import SanthaliKeyboard from "./SanthaliKeyboard";
 import { motion, AnimatePresence } from "framer-motion";
+import { Check, X } from "lucide-react";
 
 export default function TranslatorSection() {
   const [input, setInput] = useState("");
@@ -79,8 +80,12 @@ export default function TranslatorSection() {
     setLoading(false);
   };
 
-  const handleSubmit = () => setPopupMsg("Yay!");
-
+  const handleSubmit = () => {
+    setPopupMsg("Yay!");
+    setInput("");              // clear input box
+    setOutput("");             // clear output box
+    setCustomTranslation("");  // also clear this in case
+  };
   const handleUpdate = () => {
     setShowUpdateInput(true);
     setCustomTranslation(output);
@@ -99,6 +104,10 @@ export default function TranslatorSection() {
       isSanthaliToEnglish ? "Santhali → English" : "English → Santhali",
       customTranslation
     );
+      // Clear all boxes after successful update
+    setInput("");              // Clear input box
+    setOutput("");             // Clear output box
+    setCustomTranslation("");  // Clear editable field
   };
 
   const handleClosePopup = () => setPopupMsg("");
@@ -141,7 +150,7 @@ export default function TranslatorSection() {
           style={{ right: "32px", top: "-150px", height: "220px", userSelect: "none" }}
         />
 
-        <div className="relative flex-1 z-10">
+        <div className="relative flex-1 z-10 flex flex-col justify-between h-36">
           <textarea
             ref={inputRef}
             className="bg-[#F8E4C1] border-2 border-green-600 rounded-lg p-4 w-full h-28 resize-none text-base font-roboto"
@@ -152,7 +161,7 @@ export default function TranslatorSection() {
           />
         </div>
 
-        <div className="relative flex-1 z-10">
+        <div className="relative flex-1 z-10 flex flex-col justify-between h-36">
           {showUpdateInput ? (
             <form onSubmit={handleUpdateSubmit}>
               <textarea
@@ -189,16 +198,16 @@ export default function TranslatorSection() {
         {output && !showUpdateInput && (
           <>
             <button
-              className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold text-lg shadow font-roboto hover:bg-green-800 transition"
+              className="bg-green-600 hover:bg-green-800 text-white rounded-full w-12 h-12 flex items-center justify-center shadow transition"
               onClick={handleSubmit}
             >
-              Submit
+              <Check size={24} />
             </button>
             <button
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold text-lg shadow font-roboto hover:bg-blue-800 transition"
+              className="bg-blue-600 hover:bg-blue-800 text-white rounded-full w-12 h-12 flex items-center justify-center shadow transition"
               onClick={handleUpdate}
             >
-              Update
+              <X size={24} />
             </button>
           </>
         )}
