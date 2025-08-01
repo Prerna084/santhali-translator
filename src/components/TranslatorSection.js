@@ -37,7 +37,7 @@ export default function TranslatorSection() {
   };
 
   const saveTranslationToServer = async (input, output, direction, updatedText = "") => {
-    await fetch("http://localhost:5000/save-translation", {
+    await fetch("http://localhost:8080/save-translation", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ input, output, direction, updatedText }),
@@ -52,7 +52,7 @@ export default function TranslatorSection() {
     setPopupMsg("");
 
     try {
-      const response = await fetch("http://localhost:5000/translate", {
+      const response = await fetch("http://localhost:8080/translate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
